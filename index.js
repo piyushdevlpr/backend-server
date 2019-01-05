@@ -3,7 +3,7 @@ var express     = require("express"),
     server = require("http").createServer(app),
     ob = require('./data');
 
-app.get("/data",function(req,res){
+app.get("/",function(req,res){
   var d = new Date();
   for(let i in ob){
     if(ob[i]["id"] === d.getDate()+""+d.getMonth()){
