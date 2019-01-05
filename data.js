@@ -21,12 +21,12 @@
     "Mannathu Padnabha Pillai – The social reformer and freedom fighter from the state of Kerala was born in 1878 in the erstwhile princely state of Travancore. He dedicated his life to uplift the status of the Nair community and thus founded NSS (Nair Service Society).",
     "Kirti Azad – The former cricketer is the son of former Bihar chief minister, Bhagwat Jha Azad. Azad remained active in cricket between 1980 to 86 and was part of the squad which won 1983 Cricket world cup. He’s also a Member of Parliament from Darbhanga, Bihar."]
   },{
-    id : "0300", 
+    id : "0500", 
     events : ["Bharatiya Janata Party (BJP) leader Jaswant Singh who served as minister of finance, defence and external affairs in the union cabinet was born on January 3, 1938 at Jasol village in Rajasthan’s Barmer district to Sardara Singh and Kunwar Baisa.",
     ]
   },
   {
-    id : "0500", 
+    id : "0600", 
     events : ["1066 – Edward the Confessor dies childless, sparking a succession crisis that will eventually lead to the Norman conquest of England.",
       "1477 – Battle of Nancy: Charles the Bold is killed and Burgundy becomes part of France.",
       "1500 – Duke Ludovico Sforza conquers Milan.",

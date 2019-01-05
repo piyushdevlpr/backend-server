@@ -9,7 +9,9 @@ app.get("/",function(req,res){
   for(let i in ob){
    // console.log(ob[i]["id"]) ;
     if(ob[i]["id"] === d.getDate()+""+d.getMonth()){
-      res.send("piyush") ;
+      res.send(ob[i]["events"]) ;
+    }else{
+      res.send("hello");
     }
   }
  // ob[i]["events"]
