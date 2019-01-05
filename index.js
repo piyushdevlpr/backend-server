@@ -1,7 +1,7 @@
 var express     = require("express"),
     app         = express(),
-    server= require("http").createServer(app),
-    var ob = [
+    server= require("http").createServer(app);
+  var ob = [
       {
         id : "2911",
         events : ["1929 - On 31 December 1929, Congress passed the historic resolution declaring Purna Swaraj as its goal.",
