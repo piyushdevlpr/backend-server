@@ -9,10 +9,10 @@ app.get("/",function(req,res){
   for(let i in ob){
    // console.log(ob[i]["id"]) ;
     if(ob[i]["id"] === d.getDate()+""+d.getMonth()){
-      res.send(ob[i]["events"]) ;
+      res.send("piyush") ;
     }
   }
-    
+ // ob[i]["events"]
 });
 var port = process.env.PORT || 3000;
 server.listen(port,function(){ 
