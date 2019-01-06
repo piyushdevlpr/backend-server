@@ -43,7 +43,7 @@
   },{
     id : "60",
     events : [
-      "1540 – King Henry VIII of England marries Anne of Cleves.",
+"1540 – King Henry VIII of England marries Anne of Cleves.",
 "1661 – English Restoration: The Fifth Monarchists unsuccessfully attempt to seize control of London, England.",
 "1690 – Joseph, son of Emperor Leopold I, becomes King of the Romans.",
 "1781 – In the Battle of Jersey, the British defeat the last attempt by France to invade Jersey in the Channel Islands.",
@@ -71,7 +71,6 @@
 "1978 – The Crown of St. Stephen (also known as the Holy Crown of Hungary) is returned to Hungary from the United States, where it was held after World War II.",
 "1989 – Satwant Singh and Kehar Singh are sentenced to death for conspiracy in the assassination of Prime Minister Indira Gandhi; the two men are executed the same day.",
 "1992 – President of Georgia Zviad Gamsakhurdia flees the country as a result of the military coup.",
-"1993 – Indian Border Security Force units kill 55 Kashmiri civilians in Sopore, Jammu and Kashmir, in revenge after militants ambushed a BSF patrol.",
 "1995 – A chemical fire in an apartment complex in Manila, Philippines, leads to the discovery of plans for Project Bojinka, a mass-terrorist attack.",
 "2001 – The US Congress certifies George W. Bush winner of 2000 presidential election.",
 "2005 – American Civil Rights Movement: Edgar Ray Killen is arrested as a suspect in the 1964 murders of Chaney, Goodman, and Schwerner.",
