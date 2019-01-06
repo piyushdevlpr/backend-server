@@ -7,7 +7,12 @@ app.get("/",function(req,res){
   var d = new Date();
   for(let i in ob){
     if(ob[i]["id"] === d.getDate()+""+d.getMonth()){
-      res.json(ob[i]["events"]) ;
+      var obj = {
+        'cont':ob[i]["events"],
+        'day': d.toLocaleDateString(),
+        'time':d.toLocaleTimeString()
+      }
+      res.json(obj) ;
     }
   }
  // ob[i]["events"]
