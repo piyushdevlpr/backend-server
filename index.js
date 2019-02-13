@@ -5,7 +5,34 @@ var express     = require("express"),
     ob = require('./data');
 
 var text = "" ;
-var events = ['server down'] ;
+var events = [] ;
+
+function downloadPage(url){
+  return new Promise((resolve, reject) => {
+  request(url, function (err, response, body) {
+    if(err){
+    var error = "cannot connect to the server";
+    console.log(error);
+   } else {
+     body = JSON.parse(body);
+     var id = Object.getOwnPropertyNames(body.query.pages);
+     text = "" ;
+     events = [] ;
+     text = body.query.pages[id].extract ;
+     resolve(text);
+   }
+   });
+});
+}
+
+async function myBackEndLogic(url) {
+  try {
+     await downloadPage(url) ;
+  } catch (error) {
+      console.error('ERROR:');
+      console.error(error);
+  }
+}
 
 app.get("/",function(req,res){
   var d = new Date();
@@ -37,24 +64,9 @@ app.get("/",function(req,res){
     day = "December" ;
   } 
   var query = day+"_"+d.getDate() ;
-  
-
   var url = "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=&format=json&titles="+query+"&rvprop=content" ;
-  request(url, function (err, response, body) {
-   if(err){
-   var error = "cannot connect to the server";
-   console.log(error);
-  } else {
-    body = JSON.parse(body);
-    //console.log(body) ;
-    var id = Object.getOwnPropertyNames(body.query.pages);
-    text = "" ;
-    events = [] ;
-    //console.log(id) ;
-    text = body.query.pages[id].extract ;
-    //console.log(text) ;
-  }
-  });
+  myBackEndLogic(url);
+  
   var start = text.indexOf("== Events ==") + 13 ;
   var end = text.indexOf("== Births ==")-2;
   var ev = text.slice(start,end) ;
@@ -74,7 +86,8 @@ app.get("/",function(req,res){
         'day': d.toLocaleDateString(),
         'time':d.toLocaleTimeString()
       }
-      res.json(obj) ;
+      res.json(obj);
+      //setTimeout((function() {res.json(obj)}), 8000);
 });
 var port = process.env.PORT || 3000;
 server.listen(port,function(){ 
