@@ -4,7 +4,8 @@ var express     = require("express"),
     request = require('request'),
     ob = require('./data');
 
-
+var text = "" ;
+var events = ['server down'] ;
 
 app.get("/",function(req,res){
   var d = new Date();
@@ -37,8 +38,7 @@ app.get("/",function(req,res){
   } 
   var query = day+"_"+d.getDate() ;
   
-  var text = "" ;
-  var events = [] ;
+
   var url = "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=&format=json&titles="+query+"&rvprop=content" ;
   request(url, function (err, response, body) {
    if(err){
@@ -46,27 +46,29 @@ app.get("/",function(req,res){
    console.log(error);
   } else {
     body = JSON.parse(body);
-    console.log(body) ;
+    //console.log(body) ;
     var id = Object.getOwnPropertyNames(body.query.pages);
-    
-    console.log(id) ;
+    text = "" ;
+    events = [] ;
+    //console.log(id) ;
     text = body.query.pages[id].extract ;
-    console.log(text) ;
-    var start = text.indexOf("== Events ==") + 13 ;
-    var end = text.indexOf("== Births ==")-2;
-    var ev = text.slice(start,end) ;
-    var linestart = 0 ;
-    var linend = 0 ;
-    for(var i = start ; i <= end; i++){
-      if(ev.charAt(i) == '\n'){
-        linend = i ;
-        events.push(ev.slice(linestart,linend)) ;
-        linestart = linend + 1;
-      }
-    }
-    console.log(events) ;
+    //console.log(text) ;
   }
   });
+  var start = text.indexOf("== Events ==") + 13 ;
+  var end = text.indexOf("== Births ==")-2;
+  var ev = text.slice(start,end) ;
+  var linestart = 0 ;
+  var linend = 0 ;
+  
+  for(var i = start ; i <= end; i++){
+    if(ev.charAt(i) == '\n'){
+      linend = i ;
+      events.push(ev.slice(linestart,linend)) ;
+      linestart = linend + 1;
+    }
+  }
+  console.log(events) ;
       var obj = {
         'cont':events,
         'day': d.toLocaleDateString(),
