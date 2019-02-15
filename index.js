@@ -7,8 +7,41 @@ var express     = require("express"),
 var text = "" ;
 var events = [] ;
 
-function downloadPage(url){
-  return new Promise((resolve, reject) => {
+//function downloadPage(url){
+  //return new Promise((resolve, reject) => {
+    var d = new Date();
+    var da = d.getMonth() ;
+    var day = "";
+    if(da == 0){
+      day = "Januray" ;
+    }else if(da == 1){
+      day = "February" ;
+    }else if(da == 2){
+      day = "March" ;
+    } else if(da == 3){
+      day = "April" ;
+    } else if(da == 4){
+      day = "May" ;
+    } else if(da == 5){
+      day = "June" ;
+    } else if(da == 6){
+      day = "July" ;
+    } else if(da == 7){
+      day = "August" ;
+    } else if(da == 8){
+      day = "September" ;
+    } else if(da == 9){
+      day = "October" ;
+    } else if(da == 10){
+      day = "November" ;
+    } else{
+      day = "December" ;
+    } 
+    var query = day+"_"+d.getDate() ;
+    var url = "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=&format=json&titles="+query+"&rvprop=content" ;
+   // myBackEndLogic(url);
+    
+
   request(url, function (err, response, body) {
     if(err){
     var error = "cannot connect to the server";
@@ -19,76 +52,53 @@ function downloadPage(url){
      text = "" ;
      events = [] ;
      text = body.query.pages[id].extract ;
-     resolve(text);
-   }
-   });
-});
-}
-
-async function myBackEndLogic(url) {
-  try {
-     await downloadPage(url) ;
-  } catch (error) {
-      console.error('ERROR:');
-      console.error(error);
-  }
-}
-
-app.get("/",function(req,res){
-  var d = new Date();
-  var da = d.getMonth() ;
-  var day = "";
-  if(da == 0){
-    day = "Januray" ;
-  }else if(da == 1){
-    day = "February" ;
-  }else if(da == 2){
-    day = "March" ;
-  } else if(da == 3){
-    day = "April" ;
-  } else if(da == 4){
-    day = "May" ;
-  } else if(da == 5){
-    day = "June" ;
-  } else if(da == 6){
-    day = "July" ;
-  } else if(da == 7){
-    day = "August" ;
-  } else if(da == 8){
-    day = "September" ;
-  } else if(da == 9){
-    day = "October" ;
-  } else if(da == 10){
-    day = "November" ;
-  } else{
-    day = "December" ;
-  } 
-  var query = day+"_"+d.getDate() ;
-  var url = "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=&format=json&titles="+query+"&rvprop=content" ;
-  myBackEndLogic(url);
-  
-  var start = text.indexOf("== Events ==") + 13 ;
-  var end = text.indexOf("== Births ==")-2;
-  var ev = text.slice(start,end) ;
-  var linestart = 0 ;
-  var linend = 0 ;
-  
-  for(var i = start ; i <= end; i++){
-    if(ev.charAt(i) == '\n'){
-      linend = i ;
-      events.push(ev.slice(linestart,linend)) ;
-      linestart = linend + 1;
+     var start = text.indexOf("== Events ==") + 13 ;
+     var end = text.indexOf("== Births ==")-2;
+     var ev = text.slice(start,end) ;
+     var linestart = 0 ;
+     var linend = 0 ;
+     
+     for(var i = start ; i <= end; i++){
+       if(ev.charAt(i) == '\n'){
+         linend = i ;
+         events.push(ev.slice(linestart,linend)) ;
+         linestart = linend + 1;
+       }
+     }
     }
-  }
-  console.log(events) ;
+   });
+//});
+//}
+
+//async function myBackEndLogic(url) {
+ // try {
+ //    await downloadPage(url) ;
+//  } catch (error) {
+//       console.error('ERROR:');
+//       console.error(error);
+//   }
+// }
+//function getdata(){
+app.get("/",function(req,res){
+
+  
       var obj = {
         'cont':events,
         'day': d.toLocaleDateString(),
         'time':d.toLocaleTimeString()
       }
-      res.json(obj);
-      //setTimeout((function() {res.json(obj)}), 8000);
+      // if(events.length === 0){
+      //   console.log(events) ;
+      //   res.redirect('/') ;
+      // }else{
+       
+        res.json(obj);
+  //    }//setTimeout((function() {res.json(obj)}), 8000);
 });
+//}
+var inter = setInterval(function() {
+  d = new Date() ;
+}, 1000);
 var port = process.env.PORT || 3000;
 server.listen(port,function(){ 
   console.log("server running!!!!");
