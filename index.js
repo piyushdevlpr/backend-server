@@ -6,10 +6,10 @@ var express     = require("express"),
 
 var text = "" ;
 var events = [] ;
-
-//function downloadPage(url){
+var d = new Date() ;
+function downloadPage(){
   //return new Promise((resolve, reject) => {
-    var d = new Date();
+     d = new Date();
     var da = d.getMonth() ;
     var day = "";
     if(da == 0){
@@ -68,7 +68,7 @@ var events = [] ;
     }
    });
 //});
-//}
+}
 
 //async function myBackEndLogic(url) {
  // try {
@@ -79,6 +79,7 @@ var events = [] ;
 //   }
 // }
 //function getdata(){
+downloadPage() ;
 app.get("/",function(req,res){
 
   
@@ -96,8 +97,8 @@ app.get("/",function(req,res){
   //    }//setTimeout((function() {res.json(obj)}), 8000);
 });
 //}
-var inter = setInterval(function() {
-  d = new Date() ;
+setInterval(function() {
+  downloadPage() ;
 }, 1000);
 var port = process.env.PORT || 3000;
 server.listen(port,function(){ 
